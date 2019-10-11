@@ -11,7 +11,8 @@ import {
 import CameraScreen from './Containers/Screens/Camera';
 import HomeScreen from './Containers/Screens/Home';
 //context
-import {GlobalContextProvider} from './Store/GlobalStore'
+import {GlobalContextProvider} from './Store/GlobalStore';
+import {FirebaseContextProvider} from './Store/Firebase';
 
 const styles = StyleSheet.create({
   btn: {
@@ -62,7 +63,9 @@ const App = createAppContainer(MainNavigator);
 const index = (props) => (
   (
     <GlobalContextProvider>
-      <App />
+      <FirebaseContextProvider>
+        <App />
+      </FirebaseContextProvider>
     </GlobalContextProvider>
   )
 )

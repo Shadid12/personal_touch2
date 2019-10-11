@@ -9,6 +9,9 @@ import {
     StyleSheet
 } from 'react-native';
 
+// store
+import {withFirebaseContext} from '../../Store/Firebase'
+import hoistStatics from 'hoist-non-react-statics'
 
 
 const styles = StyleSheet.create({
@@ -26,6 +29,7 @@ const styles = StyleSheet.create({
 });
 
 class CameraScreen extends React.Component {
+
     state = {
         hasCameraPermission: null,
         scanned: false,
@@ -49,6 +53,11 @@ class CameraScreen extends React.Component {
         this.setState({ scanned: true, data })
     };
 
+    store = () => {
+        this.props.firebase.doSaveData(this.state.data)
+        this.setState({ scanned: false, data: '' })
+    }
+
 
     render() {
       const {navigate} = this.props.navigation;
@@ -71,7 +80,7 @@ class CameraScreen extends React.Component {
                     <View style={styles.btnContainer}>
                         <Button
                             title={'Store'}
-                            onPress={() => this.setState({ scanned: false })}
+                            onPress={this.store}
                         />
                     </View>
                 ) : (
@@ -86,4 +95,4 @@ class CameraScreen extends React.Component {
     }
 }
 
-export default CameraScreen;
+export default hoistStatics(withFirebaseContext(CameraScreen), CameraScreen);
