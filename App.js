@@ -10,6 +10,9 @@ import {
   View
 } from 'react-native';
 
+//components
+import CameraScreen from './Containers/Screens/Camera';
+
 const styles = StyleSheet.create({
   btn: {
     alignItems: 'center',
@@ -62,21 +65,6 @@ class HomeScreen extends React.Component {
 class ProfileScreen extends React.Component {
   static navigationOptions = {
     title: 'Profile',
-  };
-  render() {
-    const {navigate} = this.props.navigation;
-    return (
-      <Button
-        title="Go to Home"
-        onPress={() => navigate('Home')}
-      />
-    );
-  }
-}
-
-class CameraScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Camera',
   };
   render() {
     const {navigate} = this.props.navigation;
