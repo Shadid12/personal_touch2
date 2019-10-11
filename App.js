@@ -4,7 +4,6 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {
   Button, 
-  Text, 
   StyleSheet, 
 } from 'react-native';
 
@@ -58,4 +57,8 @@ const MainNavigator = createStackNavigator({
 
 const App = createAppContainer(MainNavigator);
 
-export default App;
+const index = (props) => {
+  return <App />
+}
+
+export default index;
