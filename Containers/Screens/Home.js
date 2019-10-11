@@ -7,6 +7,9 @@ import {
     TouchableOpacity,
     TextInput
 } from 'react-native';
+// store
+import {withGlobalContext} from '../../Store/GlobalStore'
+import hoistStatics from 'hoist-non-react-statics'
 
 
 const styles = StyleSheet.create({
@@ -44,7 +47,7 @@ const styles = StyleSheet.create({
 });
 
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
     constructor(props) {
       super(props)
       this.state = {
@@ -65,7 +68,6 @@ export default class HomeScreen extends React.Component {
   
     render() {
       const {navigate} = this.props.navigation;
-  
       if (!this.state.isSubmit || this.state.userName === '') {
         return (
           <Fragment>
@@ -116,3 +118,5 @@ export default class HomeScreen extends React.Component {
       );
     }
 }
+
+export default hoistStatics(withGlobalContext(HomeScreen), HomeScreen);

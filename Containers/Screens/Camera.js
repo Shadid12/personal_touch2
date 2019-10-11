@@ -1,6 +1,4 @@
 import React, {Fragment} from 'react';
-
-import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 

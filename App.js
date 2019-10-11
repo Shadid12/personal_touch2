@@ -10,6 +10,8 @@ import {
 //components
 import CameraScreen from './Containers/Screens/Camera';
 import HomeScreen from './Containers/Screens/Home';
+//context
+import {GlobalContextProvider} from './Store/GlobalStore'
 
 const styles = StyleSheet.create({
   btn: {
@@ -57,8 +59,12 @@ const MainNavigator = createStackNavigator({
 
 const App = createAppContainer(MainNavigator);
 
-const index = (props) => {
-  return <App />
-}
+const index = (props) => (
+  (
+    <GlobalContextProvider>
+      <App />
+    </GlobalContextProvider>
+  )
+)
 
 export default index;
