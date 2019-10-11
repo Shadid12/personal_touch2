@@ -17,12 +17,19 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-end',
     },
+
+    btnContainer: {
+        flex: 1,
+        justifyContent: "center",
+        padding: 10
+    }
 });
 
 class CameraScreen extends React.Component {
     state = {
         hasCameraPermission: null,
         scanned: false,
+        data: ''
     };
 
     static navigationOptions = {
@@ -39,8 +46,7 @@ class CameraScreen extends React.Component {
     }
 
     handleBarCodeScanned = ({ type, data }) => {
-        this.setState({ scanned: true });
-        alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+        this.setState({ scanned: true, data })
     };
 
 
@@ -60,17 +66,21 @@ class CameraScreen extends React.Component {
       return (
         <View
             style={styles.container}>
-            <BarCodeScanner
-                onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
-                style={StyleSheet.absoluteFillObject}
-            />
-
-            {scanned && (
-                <Button
-                    title={'Tap to Scan Again'}
-                    onPress={() => this.setState({ scanned: false })}
-                />
-            )}
+            {
+                scanned ? (
+                    <View style={styles.btnContainer}>
+                        <Button
+                            title={'Store'}
+                            onPress={() => this.setState({ scanned: false })}
+                        />
+                    </View>
+                ) : (
+                    <BarCodeScanner
+                        onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
+                        style={StyleSheet.absoluteFillObject}
+                    />
+                )
+            }
         </View>
       );
     }
