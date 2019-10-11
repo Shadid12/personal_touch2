@@ -1,0 +1,118 @@
+import React, {Fragment} from 'react';
+
+import {
+    Text,
+    View,
+    StyleSheet,
+    TouchableOpacity,
+    TextInput
+} from 'react-native';
+
+
+const styles = StyleSheet.create({
+    btn: {
+      alignItems: 'center',
+      backgroundColor: '#ffa19b',
+      padding: 10,
+      marginBottom: 10,
+      borderRadius: 5
+    },
+
+    submitBtn: {
+        marginTop: 10,
+        justifyContent: 'center',
+        backgroundColor: '#1DD28D',
+        borderRadius: 5,
+        height: 50,
+        alignItems: 'center'
+    },
+
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      paddingHorizontal: 10
+    },
+    txt: {
+      height: 40, 
+      borderColor: 'gray', 
+      borderWidth: 1
+    },
+    txtContainer: {
+        flex: 1,
+        paddingHorizontal: 10
+    }
+});
+
+
+export default class HomeScreen extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = {
+        userName: '',
+        isSubmit: false
+      }
+    }
+    static navigationOptions = ({ navigation }) => {
+      if(navigation.state.params) {
+        return {
+            title: navigation.state.params.title
+        }
+      }
+      return {
+        title: `Welcome to Personal Touch`
+      }
+    };
+  
+    render() {
+      const {navigate} = this.props.navigation;
+  
+      if (!this.state.isSubmit || this.state.userName === '') {
+        return (
+          <Fragment>
+          <View style={styles.txtContainer}>
+            <Text>Enter Name: </Text>
+            <TextInput
+              style={styles.txt}
+              onChangeText={(userName) => {this.setState({userName})}}
+              value={this.state.userName}
+            />
+            <TouchableOpacity
+              style={styles.submitBtn}
+              onPress={() => {
+                const {setParams} = this.props.navigation;
+                setParams({ title: `Hello, ${this.state.userName}` })
+                this.setState({isSubmit: true})
+              }}
+            >
+              <Text>Submit</Text>
+            </TouchableOpacity>
+          </View>
+          </Fragment>
+        )
+      }
+      return (
+        <Fragment>
+          <View style={styles.container}>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => navigate('Profile', {name: 'Jane'})}
+            >
+              <Text>Go to My Profile</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => navigate('Camera', {name: 'cam'})}
+            >
+              <Text>Go to Camera Scaner</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => navigate('Camera', {name: 'cam'})}
+            >
+              <Text>Go to Scanner Mode</Text>
+            </TouchableOpacity>
+          </View>
+        </Fragment>
+      );
+    }
+}

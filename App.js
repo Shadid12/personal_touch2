@@ -6,12 +6,11 @@ import {
   Button, 
   Text, 
   StyleSheet, 
-  TouchableOpacity,
-  View
 } from 'react-native';
 
 //components
 import CameraScreen from './Containers/Screens/Camera';
+import HomeScreen from './Containers/Screens/Home';
 
 const styles = StyleSheet.create({
   btn: {
@@ -26,40 +25,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 10
   },
-});
-
-class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Welcome to Personal Touch',
-  };
-  render() {
-    const {navigate} = this.props.navigation;
-    return (
-      <Fragment>
-        <View style={styles.container}>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => navigate('Profile', {name: 'Jane'})}
-          >
-            <Text>Go to My Profile</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => navigate('Camera', {name: 'cam'})}
-          >
-            <Text>Go to Camera Scaner</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => navigate('Camera', {name: 'cam'})}
-          >
-            <Text>Go to Scanner Mode</Text>
-          </TouchableOpacity>
-        </View>
-      </Fragment>
-    );
+  txt: {
+    height: 40, 
+    borderColor: 'gray', 
+    borderWidth: 1
   }
-}
+});
 
 
 class ProfileScreen extends React.Component {
