@@ -11,6 +11,7 @@ import {
 
 // store
 import {withFirebaseContext} from '../../Store/Firebase'
+import {withGlobalContext} from '../../Store/GlobalStore'
 import hoistStatics from 'hoist-non-react-statics'
 
 
@@ -54,7 +55,11 @@ class CameraScreen extends React.Component {
     };
 
     store = () => {
-        this.props.firebase.doSaveData(this.state.data)
+        let payload = {
+            data: this.state.data,
+            userName: this.props.global.userName
+        }
+        this.props.firebase.doSaveData(payload)
         this.setState({ scanned: false, data: '' })
     }
 
@@ -95,4 +100,4 @@ class CameraScreen extends React.Component {
     }
 }
 
-export default hoistStatics(withFirebaseContext(CameraScreen), CameraScreen);
+export default hoistStatics(withFirebaseContext( withGlobalContext(CameraScreen) ), CameraScreen);

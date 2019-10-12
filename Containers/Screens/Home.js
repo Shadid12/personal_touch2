@@ -83,6 +83,7 @@ class HomeScreen extends React.Component {
               onPress={() => {
                 const {setParams} = this.props.navigation;
                 setParams({ title: `Hello, ${this.state.userName}` })
+                this.props.global.setUserName(this.state.userName)
                 this.setState({isSubmit: true})
               }}
             >
