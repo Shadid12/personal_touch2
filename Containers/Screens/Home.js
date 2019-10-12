@@ -30,6 +30,14 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
 
+    LogoutBtn: {
+        alignItems: 'center',
+        backgroundColor: '#FFFEEA',
+        padding: 10,
+        marginBottom: 10,
+        borderRadius: 5
+    },
+
     container: {
       flex: 1,
       justifyContent: 'center',
@@ -109,10 +117,15 @@ class HomeScreen extends React.Component {
               <Text>Go to Camera Scaner</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.btn}
-              onPress={() => navigate('Camera', {name: 'cam'})}
+              style={styles.LogoutBtn}
+              onPress={() => {
+                const {setParams} = this.props.navigation;
+                setParams({ title: `Welcome to Personal Touch` })
+                this.props.global.setUserName('')
+                this.setState({isSubmit: false, userName: ''})
+              }}
             >
-              <Text>Go to Scanner Mode</Text>
+              <Text>Logout</Text>
             </TouchableOpacity>
           </View>
         </Fragment>
