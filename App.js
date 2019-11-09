@@ -10,6 +10,7 @@ import {
 //components
 import CameraScreen from './Containers/Screens/Camera';
 import HomeScreen from './Containers/Screens/Home';
+import GunScreen from './Containers/Screens/GunScreen';
 //context
 import {GlobalContextProvider} from './Store/GlobalStore';
 import {FirebaseContextProvider} from './Store/Firebase';
@@ -55,7 +56,8 @@ class ProfileScreen extends React.Component {
 const MainNavigator = createStackNavigator({
   Home: {screen: HomeScreen},
   Profile: {screen: ProfileScreen},
-  Camera: {screen: CameraScreen}
+  Camera: {screen: CameraScreen},
+  Gun: {screen: GunScreen},
 });
 
 const App = createAppContainer(MainNavigator);

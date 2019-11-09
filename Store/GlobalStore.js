@@ -8,7 +8,6 @@ export class GlobalContextProvider extends React.Component {
   }
 
   setUserName = (userName) => {
-    console.log('Setting USER NAME', userName)
     this.setState({ userName });
   }
 

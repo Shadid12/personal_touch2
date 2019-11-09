@@ -114,7 +114,13 @@ class HomeScreen extends React.Component {
               style={styles.btn}
               onPress={() => navigate('Camera', {name: 'cam'})}
             >
-              <Text>Go to Camera Scaner</Text>
+              <Text>Camera Scaner</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => navigate('Gun', {name: 'gun'})}
+            >
+              <Text>Gun Scaner</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.LogoutBtn}
