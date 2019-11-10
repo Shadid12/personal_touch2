@@ -6,7 +6,8 @@ import {
     TextInput,
     View,
     StyleSheet,
-    Alert
+    Alert,
+    Text
 } from 'react-native';
 
 // store
@@ -43,8 +44,17 @@ class GunScreen extends React.Component {
         super(props)
         this.state = {
             data: '',
-            scanned: false
+            scanned: false,
+            count: 0
         };
+    }
+
+    async componentDidMount() {
+        const userName = this.props.global.userName;
+        const count = await this.props.firebase.getDataByUser(userName);
+        this.setState({
+            count
+        })
     }
 
     store = () => {
@@ -60,6 +70,7 @@ class GunScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+                <Text>Item Scaned: {this.state.count}</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={text => this.setState({data: text})}
@@ -80,7 +91,7 @@ class GunScreen extends React.Component {
           'Data Stored',
           'Your Data has been stored',
           [
-            {text: 'OK', onPress: () => console.log('OK Pressed')},
+            {text: 'OK', onPress: () => this.setState({count: this.state.count + 1})},
           ],
           { cancelable: false }
         )

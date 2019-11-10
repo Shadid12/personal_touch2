@@ -33,11 +33,26 @@ export const FirebaseContextProvider = (props) => {
         });
     }
 
+    const getDataByUser = (username) => {
+      return new Promise((resolve, reject) => {
+        const {app} = state;
+        app.database().ref('data/' + username).once('value', (snap) => {
+          console.log('Snap Val', snap.val());
+          if(snap.val()) {
+            resolve(Object.keys(snap.val()).length);
+          } else {
+            resolve(0)
+          }
+        })
+      })
+    }
+
     return (
         <FirebaseContext.Provider
           value={{
             ...state,
-            doSaveData: doSaveData
+            doSaveData: doSaveData,
+            getDataByUser: getDataByUser
           }}
         >
           {props.children}

@@ -26,6 +26,12 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         padding: 10
+    },
+    barContainer: {
+        flex: 1
+    },
+    scanner: {
+        height: '80%'
     }
 });
 
@@ -34,7 +40,8 @@ class CameraScreen extends React.Component {
     state = {
         hasCameraPermission: null,
         scanned: false,
-        data: ''
+        data: '',
+        count: 0
     };
 
     static navigationOptions = {
@@ -43,6 +50,11 @@ class CameraScreen extends React.Component {
 
     async componentDidMount() {
         this.getPermissionsAsync();
+        const userName = this.props.global.userName;
+        const count = await this.props.firebase.getDataByUser(userName);
+        this.setState({
+            count
+        })
     }
 
     getPermissionsAsync = async () => {
@@ -60,7 +72,7 @@ class CameraScreen extends React.Component {
             userName: this.props.global.userName
         }
         this.props.firebase.doSaveData(payload)
-        this.setState({ scanned: false, data: '' })
+        this.setState({ scanned: false, data: '', count: this.state.count + 1 })
     }
 
 
@@ -89,10 +101,15 @@ class CameraScreen extends React.Component {
                         />
                     </View>
                 ) : (
-                    <BarCodeScanner
-                        onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
-                        style={StyleSheet.absoluteFillObject}
-                    />
+                    <View  style={styles.barContainer}>
+                        <Text>Item Scaned: {this.state.count}</Text>
+                        <View style={styles.scanner}>
+                        <BarCodeScanner
+                            onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
+                            style={StyleSheet.absoluteFillObject}
+                        />
+                        </View>
+                    </View>
                 )
             }
         </View>
