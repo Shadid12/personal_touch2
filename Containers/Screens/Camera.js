@@ -95,6 +95,15 @@ class CameraScreen extends React.Component {
             {
                 scanned ? (
                     <View style={styles.btnContainer}>
+                        <View style={styles.scanner}>
+                            <Text>Address: { this.state.data.split('|R04~')[1] ? 
+                                this.state.data.split('|R04~')[1].split('|')[0] + '  ' : 'NaN ' }
+                                { this.state.data.split('|R06~')[1] ? 
+                                    this.state.data.split('|R06~')[1].split('|')[0] + '  ': 'NaN ' }
+                                { this.state.data.split('|R07~')[1] ? 
+                                    this.state.data.split('|R07~')[1].split('|')[0] + '  ': 'NaN ' }
+                            </Text>
+                        </View>
                         <Button
                             title={'Store'}
                             onPress={this.store}
